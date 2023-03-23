@@ -1,0 +1,21 @@
+package com.inn.cafe.service;
+
+import java.util.List;
+
+
+import com.inn.cafe.entity.Category;
+import com.inn.cafe.model.CategoryDTO;
+import com.inn.cafe.util.CategoryConverter;
+public interface CategoryService {
+	String createCategory(CategoryConverter category);
+	CategoryDTO getCategoryById(long categoryId);
+	
+	List<CategoryDTO>getAllCategory();
+	CategoryDTO updateCategory(long categoryId, CategoryConverter category1);
+	
+	String deleteCategoryById(long categoryId);
+	void deleteAllCategory();
+	
+	List<CategoryDTO>getCategoryByName(String categoryName);
+	
+}
