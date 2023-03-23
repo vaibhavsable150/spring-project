@@ -1,0 +1,65 @@
+package com.inn.cafe.Controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import com.inn.cafe.model.CafeManagerDTO;
+import com.inn.cafe.service.CafeManagerService;
+import com.inn.cafe.util.CafeManagerConverter;
+
+import jakarta.validation.Valid;
+
+public class CafeManagerController {
+
+
+
+	@Autowired
+	private CafeManagerService cafemanagerService;
+	
+	@Autowired
+	private CafeManagerConverter cafemanagerconverter;
+	
+	@PostMapping("/createShopManager")
+	public String createShopManager (@Valid @RequestBody CafeManagerDTO cafemanagerDTO)
+	{
+		final CafeManagerConverter sm= cafemanagerconverter.convertDTOToCafeManager(cafemanagerDTO);
+		return cafemanagerService.createCafeManager(sm) ;
+		
+	}
+	@GetMapping("/getCustomerById/{Cafemanager_id}")
+	public CafeManagerDTO getCafeById(@PathVariable("Cafemanager_id") int Cafemanager_id)
+	{
+		return cafemanagerService.getCafeManagerById(Cafemanager_id);
+		
+	
+}
+	@GetMapping("/getAllCafeManager")
+	public List<CafeManagerDTO> getAllCafeManager(){
+		return cafemanagerService.getAllCafeManager();
+		
+	}
+	
+	@PutMapping("/updateCafeManager/{id}")
+	public CafeManagerDTO updateCafeManager (@PathVariable("Cafemanager_id") int Cafemanager_id, 
+			@RequestBody CafeManagerDTO cafemanagerDTO)
+	{
+		
+		CafeManagerConverter sm1 = CafeManagerConverter.convertDTOToCafeManager(cafemanagerDTO);
+		return cafemanagerService.updateCafeManager(Cafemanager_id, sm1);
+		
+	}
+	@GetMapping("/getCafemanagerByName/{Cafemanagername}")
+	public List<CafeManagerDTO> getCafemanagerByName(@PathVariable("cafemanagername") String cafemanagername)
+	{
+		return cafemanagerService.getCafemanagerByshopmanagername(cafemanagername);
+		
+	}
+}
