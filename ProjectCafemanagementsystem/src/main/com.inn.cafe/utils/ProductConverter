@@ -1,0 +1,33 @@
+package com.inn.cafe.util;
+
+import org.springframework.beans.BeanUtils;
+
+import org.springframework.stereotype.Component;
+
+import com.inn.cafe.entity.Product;
+import com.inn.cafe.model.ProductDTO;
+
+@Component
+public class ProductConverter {
+
+	public ProductDTO convertEntityToProductDTO (Product products)
+	{
+		ProductDTO productDTO = new ProductDTO();
+		if(products != null)
+		{
+			BeanUtils.copyProperties(products, productDTO);
+		}
+		return productDTO;
+	}
+	
+	public ProductConverter convertDTOToProduct(ProductDTO productDTO)
+	{
+		ProductConverter product = new ProductConverter();
+		if(productDTO != null)
+		{
+			BeanUtils.copyProperties(productDTO, product);
+		}
+		return product;
+	}
+
+}
