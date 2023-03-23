@@ -1,0 +1,23 @@
+package com.inn.cafe.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.inn.cafe.entity.CafeManager;
+import com.inn.cafe.util.CafeManagerConverter;
+public interface CafeManagerRepository extends JpaRepository<CafeManager, Integer>{
+
+	Object save = null;
+
+	@Query("from CafeManager b where b.cafemanagerName like %:a%")
+	List<CafeManager> findByCafemanagerName (@Param("a")  String cafemanagerName);
+
+	static void save(CafeManagerConverter sm) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
