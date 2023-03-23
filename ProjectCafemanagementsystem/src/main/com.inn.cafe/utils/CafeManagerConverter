@@ -1,0 +1,32 @@
+package com.inn.cafe.util;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
+
+import com.inn.cafe.entity.CafeManager;
+import com.inn.cafe.model.CafeManagerDTO;
+
+import jakarta.validation.Valid;
+public class CafeManagerConverter {
+
+	public CafeManagerDTO  convertEntityToShopManagerDTO (CafeManager sm)
+	{
+		CafeManagerDTO shopmanagerDTO = new CafeManagerDTO();
+		if(sm!=null)
+		{
+			BeanUtils.copyProperties(sm, shopmanagerDTO);
+			
+		}
+		return shopmanagerDTO;
+		
+	}
+	public CafeManagerConverter convertDTOToShopManager (CafeManagerDTO shopmanagerDTO)
+	{
+		CafeManagerConverter sm= new CafeManagerConverter();
+		if(shopmanagerDTO != null)
+		{
+			BeanUtils.copyProperties(shopmanagerDTO, sm);
+			
+			
+		}
+		return sm;
+	}}
