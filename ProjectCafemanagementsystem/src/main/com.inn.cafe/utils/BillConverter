@@ -1,0 +1,39 @@
+package com.inn.cafe.util;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+
+import com.inn.cafe.entity.Bill;
+
+import com.inn.cafe.model.BillDTO;
+
+
+@Component
+public class BillConverter {
+
+	public BillDTO  convertEntityToShopManagerDTO (Bill sm)
+	{
+		BillDTO billDTO = new BillDTO();
+		if(sm!=null)
+		{
+			BeanUtils.copyProperties(sm, billDTO);
+			
+		}
+		return billDTO;
+		
+	}
+	public BillConverter convertDTOToBillManager (BillDTO billDTO)
+	{
+		BillConverter sm= new BillConverter();
+		if(billDTO != null)
+		{
+			BeanUtils.copyProperties(billDTO, sm);
+			
+			
+		}
+		return sm;
+	}
+	
+}
