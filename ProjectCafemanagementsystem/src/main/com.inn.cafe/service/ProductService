@@ -1,0 +1,33 @@
+package com.inn.cafe.service;
+
+import java.util.List;
+
+
+
+import com.inn.cafe.entity.Product;
+import com.inn.cafe.model.ProductDTO;
+import com.inn.cafe.util.ProductConverter;
+public interface ProductService {
+
+String createProduct(ProductConverter products);
+	
+	ProductDTO getProductById(long productId);
+	List<ProductDTO> getAllProducts();
+	
+	ProductDTO updateProduct(long productId, ProductConverter prducts);
+	
+	String deleteProductById(long productId);
+	void deleteAllProducts();
+	
+	List<ProductDTO> getProductByName(String productName);
+
+
+	
+
+	
+	
+
+	
+	
+	
+}
