@@ -1,0 +1,82 @@
+package com.inn.cafe.serviceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.inn.cafe.entity.CafeManager;
+import com.inn.cafe.model.CafeManagerDTO;
+import com.inn.cafe.repository.CafeManagerRepository;
+import com.inn.cafe.service.CafeManagerService;
+import com.inn.cafe.util.CafeManagerConverter;
+
+@Service
+public class CafeManagerServiceimpl implements CafeManagerService{
+	@Autowired
+	private CafeManagerRepository cafemanagerRepository;
+	@Autowired
+	private CafeManagerConverter cafemanagerconverter;
+
+	@Override
+	public String createCafeManager (CafeManager sm) {
+		String message= null;
+		
+		
+		 
+		cafemanagerRepository.save(sm);
+		
+		if(sm!=null)
+		{
+			message="Cafe details added successfully!!!!!";
+		}
+		return message;
+	}
+
+	@Override
+	public CafeManagerDTO getCafeManagerById(int CafeManager_id) {
+		CafeManager sm= cafemanagerRepository.findById(CafeManager_id).get();
+		return cafemanagerconverter.convertEntityToShopManagerDTO(sm);
+			
+	}
+
+	@Override
+	public List<CafeManagerDTO> getAllCafeManager() {
+		List<CafeManager> sm=cafemanagerRepository.findAll();
+		List<CafeManagerDTO> cafemanagerDTO=new ArrayList<>();
+		for(CafeManager s:sm)
+		{
+			cafemanagerDTO.add(cafemanagerconverter.convertEntityToShopManagerDTO(s));
+		}
+		return cafemanagerDTO;
+	}
+
+	@Override
+	public CafeManagerDTO updateCafeManager(int Cafemanager_id, CafeManager sm) {
+		CafeManager existingCafeManager = cafemanagerRepository.findById(Cafemanager_id).get();
+		
+		existingCafeManager.setCafemanagerName(sm.getCafemanagerName());
+		
+		cafemanagerRepository.save(existingCafeManager);
+		
+		return cafemanagerconverter.convertEntityToShopManagerDTO(existingCafeManager);
+	}
+
+	@Override
+	public List<CafeManagerDTO> getCafemanagerBycafemanagername(String cafemanagername) {
+		List<CafeManager> cafemanager=cafemanagerRepository.findByCafemanagerName(cafemanagername);
+		List<CafeManagerDTO> cafemanagerDTO =new ArrayList<>();
+		for(CafeManager s: cafemanager)
+		{
+			CafemanagerDTO.add(cafemanagerconverter.convertEntityToCafeManagerDTO(s));
+		}
+		return CafeManager;
+	}
+
+	}
+
+	
+
+
+
